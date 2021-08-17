@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 
 @SpringBootTest
@@ -22,9 +23,9 @@ class UserRepositoryTest {
 
     @Test
     void crud() {
-
-        Example<User> example = Example.of(new User("martin", "martin@fastcampus.com"));
-
-        userRepository.findAll(example).forEach(System.out::println);
+        userRepository.save(new User("david", "david@fastcampus.com"));
+        User user = userRepository.findById(1L).orElseThrow(null);
+        user.setEmail("martin-updated@fastcampus.com");
+        userRepository.save(user);
     }
 }

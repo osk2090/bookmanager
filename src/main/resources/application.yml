@@ -15,7 +15,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: dh985622
-    initialization-mode: always
+    initialization-mode: embedded
 
   jpa:
     open-in-view: false
