@@ -1,5 +1,6 @@
 package com.fastcampus.jpa.bookmanager.repository;
 
+import com.fastcampus.jpa.bookmanager.domain.Gender;
 import com.fastcampus.jpa.bookmanager.domain.User;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -17,10 +18,10 @@ class UserRepositoryTest {
 
     @Test
     void crud() {
-        userRepository.save(new User("david", "david@fastcampus.com"));
-        User user = userRepository.findById(1L).orElseThrow(null);
-        user.setEmail("martin-updated@fastcampus.com");
-        userRepository.save(user);
+//        userRepository.save(new User("david", "david@fastcampus.com"));
+//        User user = userRepository.findById(1L).orElseThrow(null);
+//        user.setEmail("martin-updated@fastcampus.com");
+//        userRepository.save(user);
     }
 
     @Test
@@ -66,9 +67,31 @@ class UserRepositoryTest {
 //        System.out.println("findLast1ByName : " + userRepository.findLast1ByName("martin"));
 //        System.out.println("findTop1ByNameOrderByIdDesc : " + userRepository.findTop1ByNameOrderByIdDesc("martin"));
 //        System.out.println("findFirstByNameOrderByIdDescEmailAsc : " + userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
-        System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("martin", Sort.by(Sort.Order.desc("id"))));
-        System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("martin", Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
-        System.out.println("findByNameWithPaging : " + userRepository.findByName("martin", PageRequest.of(1, 1, Sort.by(Sort.Order.desc("id")))).getTotalElements());
+//        System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("martin", Sort.by(Sort.Order.desc("id"))));
+//        System.out.println("findFirstByNameWithSortParams : " + userRepository.findFirstByName("martin", Sort.by(Sort.Order.desc("id"), Sort.Order.asc("email"))));
+//        System.out.println("findByNameWithPaging : " + userRepository.findByName("martin", PageRequest.of(1, 1, Sort.by(Sort.Order.desc("id")))).getTotalElements());
+    }
+
+    @Test
+    void insertAndUpdateTest() {
+        User user = new User();
+//        user.setName("martin");
+//        user.setEmail("martin2@fastcampus.com");
+//        userRepository.save(user);
+//        System.out.println("--------------------------------");
+//
+//        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+//        user2.setName("marrrrrtin");
+//        userRepository.save(user2);
+    }
+
+    @Test
+    void enumTest() {
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.FEMALE);
+        userRepository.save(user);
+        userRepository.findAll().forEach(System.out::println);
+        System.out.println(userRepository.findRawRecord().get("gender"));
 
     }
 }
